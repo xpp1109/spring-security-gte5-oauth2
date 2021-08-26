@@ -1,3 +1,57 @@
+> 说明
+
+​	spring Security5 时候，不推荐使用spring-security-oauth2。提供了新的方法（https://github.com/spring-projects/spring-authorization-server）
+
+需要注意的是该方式支持的并不是oauth2，而是oauth2.1，什么是oauth2.1呢？推荐查看：https://oauth.net/2.1/和https://aaronparecki.com/2019/12/12/21/its-time-for-oauth-2-dot-1。
+
+摘取oauth2.net网站上对比oauth2的说明：
+
+主要区别（以下使用翻译软件翻译，大致意思没错）
+
+- 使用授权代码流的所有 OAuth 客户端都需要 PKCE
+- 必须使用精确的字符串匹配来比较重定向 URI
+- `response_type=token`本规范中省略了隐式授权 ( )
+- 本规范中省略了资源所有者密码凭证授权
+- 不记名令牌用法省略了在 URI 的查询字符串中使用不记名令牌
+- 公共客户端的刷新令牌必须受发送方限制或一次性使用
+
+> 官方demo运行
+
+​	根据https://github.com/spring-projects/spring-authorization-server上说明使用gradle命令运行即可。
+
+> 拷贝官方代码（基本未做更改），使用postman进行测试。
+
+​		代码位置：authorization-server
+
+​		
+
+```
+authorization-server
+├── README.md
+├── authorization-server.iml
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── xpp
+    │   │           └── ssgo
+    │   │               └── as
+    │   │                   ├── AuthorizationServerApplication.java
+    │   │                   ├── config
+    │   │                   │   ├── SecurityConfig.java
+    │   │                   │   └── WebAuthorizationServerConfig.java
+    │   │                   └── jose
+    │   │                       ├── Jwks.java
+    │   │                       └── KeyGeneratorUtils.java
+    │   └── resources
+    │       └── application.yml
+    └── test
+        └── java
+```
+
+
+
 > 测试
 
 * 授权码模式
@@ -62,7 +116,7 @@
   }
   ```
 
-  
+  简化模式（response_type=token）在oauth2.1被移除.
 
 * 客户端模式：
 
@@ -85,4 +139,41 @@
   }
   ```
 
-* 
+* 密码模式 在oauth2.1被移除。
+
+  之前以为是bug，就给提了issue（https://github.com/spring-projects/spring-authorization-server/issues/419），官方回复不支持。
+
+  但是有扩展方式。还没弄。具体可看我提出的issue的作者回复。
+
+  
+
+  
+
+
+
+> 官方使用的是inmemory方式。本人通过查看源码发现还支持jdbc方式，redis方式不支持。之后会根据demo修改一版jdbc方式，以及动态查询用户名密码的方式。
+
+
+
+> spring-security-oauth2的实现方式，可查看我之前的笔记
+>
+> 知乎：https://zhuanlan.zhihu.com/p/403379055
+>
+> github源码：https://github.com/xpp1109/spring-security-lt5-oauth2
+
+
+
+> 本文内容github地址是：https://github.com/xpp1109/spring-security-gte5-oauth2
+
+
+
+> 一键三联，关注、点赞、分享。完结撒花，谢谢！
+
+
+
+---
+
+梦想越是美丽，就越是显得遥不可及。可奇怪的是，一旦你下定了决心，很快地，那些梦想就一一成为了现实！
+
+---
+
