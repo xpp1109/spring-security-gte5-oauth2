@@ -61,15 +61,13 @@ authorization-server
 
   浏览器访问：https://localhost:8080/h2-console
 
-  ![image-20210826135010766](/Users/shizhenchao/Library/Application Support/typora-user-images/image-20210826135010766.png)
+  ![image-20210826135010766](https://raw.githubusercontent.com/xpp1109/images/main/uPic/image-20210826135010766.png)
 
   点击Connect：
 
   ![image-20210826135541371](https://raw.githubusercontent.com/xpp1109/images/main/uPic/image-20210826135541371.png)
 
   我们看到有五张表创建，打开表会发现数据也被初始化进去了。
-
-  
 
 * 授权码模式
 
