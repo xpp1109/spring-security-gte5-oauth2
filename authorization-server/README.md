@@ -25,7 +25,7 @@
 
 ​		
 
-```
+```tex
 authorization-server
 ├── README.md
 ├── authorization-server.iml
@@ -45,6 +45,7 @@ authorization-server
     │   │                       ├── Jwks.java
     │   │                       └── KeyGeneratorUtils.java
     │   └── resources
+    │       ├── data.sql
     │       └── application.yml
     └── test
         └── java
@@ -54,9 +55,25 @@ authorization-server
 
 > 测试
 
+* 启动项目
+
+  查看自动创建的表结构：
+
+  浏览器访问：https://localhost:8080/h2-console
+
+  ![image-20210826135010766](/Users/shizhenchao/Library/Application Support/typora-user-images/image-20210826135010766.png)
+
+  点击Connect：
+
+  ![image-20210826135541371](https://raw.githubusercontent.com/xpp1109/images/main/uPic/image-20210826135541371.png)
+
+  我们看到有五张表创建，打开表会发现数据也被初始化进去了。
+
+  
+
 * 授权码模式
 
-  启动项目，请求授权码模式地址：http://localhost:8080/oauth2/authorize?response_type=code&client_id=messaging-client&scope=message.read&redirect_uri=https://baidu.com
+  请求授权码模式地址：http://localhost:8080/oauth2/authorize?response_type=code&client_id=messaging-client&scope=message.read&redirect_uri=https://baidu.com
 
   ![image-20210825172558674](https://raw.githubusercontent.com/xpp1109/images/main/uPic/image-20210825172558674.png)
 
@@ -146,14 +163,6 @@ authorization-server
   但是有扩展方式。还没弄。具体可看我提出的issue的作者回复。
 
   
-
-  
-
-
-
-> 官方使用的是inmemory方式。本人通过查看源码发现还支持jdbc方式，redis方式不支持。之后会根据demo修改一版jdbc方式，以及动态查询用户名密码的方式。
-
-
 
 > spring-security-oauth2的实现方式，可查看我之前的笔记
 >

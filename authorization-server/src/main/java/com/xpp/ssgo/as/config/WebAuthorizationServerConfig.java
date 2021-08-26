@@ -103,14 +103,16 @@ public class WebAuthorizationServerConfig {
     public EmbeddedDatabase embeddedDatabase() {
         // @formatter:off
         return new EmbeddedDatabaseBuilder()
-                .generateUniqueName(true)
+                .generateUniqueName(false)
+                .setName("oauth2db")
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
                 .addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql")
                 .addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-consent-schema.sql")
                 .addScript("org/springframework/security/oauth2/server/authorization/client/oauth2-registered-client-schema.sql")
+                // 初始化userdetails相关表。共两张表
+                .addScript("org/springframework/security/core/userdetails/jdbc/users.ddl")
                 .build();
         // @formatter:on
     }
-
 }
